@@ -18,7 +18,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => '03-labo-1-todo-app',
+    'database' => 'webdev2-todo',
     'username' => 'root',
     'password' => 'secret',
     'charset' => 'utf8',

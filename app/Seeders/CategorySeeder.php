@@ -3,39 +3,37 @@
 namespace App\Seeders;
 
 use App\Http\Models\Category;
-use Faker\Factory;
-
+use Faker\Factory as Faker;
 
 class CategorySeeder {
 
     private static $amountOfRecords = 10;
 
-    public static function run() {
-        // $categories = self::seed();
-    }
+    public static function seed() {
 
-    private static function seed() {
         $categories = [];
-        for($i = 0; $i < self::$amountOfRecords; $i++) {
+        for($i=0; $i<self::$amountOfRecords; $i++) {
+            // random category genereren
             $randomCategory = self::generate();
 
-            $category = new Category();
-            $category->title = $randomCategory;
-            $category->slug = self::slugify($randomCategory);
-            $category->save();
-            $categories[] = $category;
-        }
+            // nieuwe entiteit instantiëren
+            $categoryEntity = new Category();
+            // entiteit beschrijven
+            $categoryEntity->name = $randomCategory;
+            // omvormen tot een url-friendly slug
+            $categoryEntity->slug = self::slugify($randomCategory);
+            $categoryEntity->save();
 
-        return $categories;
+            $categories[] = $categoryEntity;
+        }
     }
 
     private static function generate() {
-        $faker = Factory::create();
-
-        return $faker->word();
+        $faker = Faker::create();
+        return $faker->words(2, true);
     }
 
-    private static function slugify($text, string $divider = '-')
+    public static function slugify($text, string $divider = '-')
     {
         // replace non letter or digits by divider
         $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
@@ -62,4 +60,3 @@ class CategorySeeder {
         return $text;
     }
 }
-

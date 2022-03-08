@@ -9,8 +9,7 @@ $app = AppFactory::create();
 // user detail route, with id wildcard
 $app->get('/[{category}]', TodoController::class . ":index");
 
-// seeding routes
-// $app->get('/seed/categories', CategorySeeder::class . ':run');
+$app->get('/seed/categories', CategorySeeder::class . ":seed");
 
 // beam me up, scotty
 $app->run();
